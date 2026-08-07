@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}내 프로젝트 - Project Flow{% endblock %}
+{% block content %}
+<div class="page-head"><h1>내 프로젝트</h1><a class="button" href="/app/projects/new">프로젝트 만들기</a></div>
+{% if projects %}
+  <ul class="cards">
+    {% for project in projects %}
+      <li><a href="/app/projects/{{ project.id }}"><strong>{{ project.name }}</strong></a><span>할 일 {{ project.tasks|length }}개</span></li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="empty">아직 프로젝트가 없습니다.</p>
+{% endif %}
+{% endblock %}
