@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{{ project.name }} - Project Flow{% endblock %}
+{% block content %}
+<a href="/app/projects">← 목록</a>
+<h1>{{ project.name }}</h1>
+<p>{{ project.description or '설명이 없습니다.' }}</p>
+<p class="meta">소유자: {{ project.owner.display_name }} ({{ project.owner.username }})</p>
+
+<section>
+  <h2>할 일 추가</h2>
+  <form class="inline-form" method="post" action="/app/projects/{{ project.id }}/tasks">
+    <input name="title" maxlength="160" required placeholder="할 일 제목">
+    <button type="submit">추가</button>
+  </form>
+</section>
+
+<section>
+  <h2>할 일</h2>
+  {% if project.tasks %}
+    <ul class="tasks">
+      {% for task in project.tasks %}
+        <li>
+          <span><strong>{{ task.title }}</strong> <span class="status">{{ '완료' if task.status == 'done' else '진행 중' }}</span></span>
+          {% if task.status == 'pending' %}
+            <form class="inline" method="post" action="/app/tasks/{{ task.id }}/complete"><button type="submit">완료로 변경</button></form>
+          {% else %}
+            <form class="inline" method="post" action="/app/tasks/{{ task.id }}/reopen"><button type="submit">다시 열기</button></form>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">등록된 할 일이 없습니다.</p>
+  {% endif %}
+</section>
+
+<section class="danger-zone">
+  <h2>프로젝트 삭제</h2>
+  <p>프로젝트를 삭제하면 소속 할 일도 함께 삭제됩니다.</p>
+  <form method="post" action="/app/projects/{{ project.id }}/delete"><button class="danger" type="submit">프로젝트 삭제</button></form>
+</section>
+{% endblock %}
