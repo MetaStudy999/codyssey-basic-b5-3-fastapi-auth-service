@@ -99,7 +99,7 @@ Mission은 "이전 미션에서 구현한 웹 애플리케이션을 기반으로
 - [x] G5 RUNTIME - local Uvicorn /health 200, protected URL 303 verified
 - [x] G6 EVIDENCE - `evidence/test-results.md`
 - [x] G7 LEARN - `docs/LEARNING.md`, `docs/ARCHITECTURE.md`
-- [ ] G8 MERGE
+- [x] G8 MERGE - implementation PR #1 merged (642f65527476f3d85832631b757137c9e52e4a06)
 
 ## 10. STOP Rule
 
