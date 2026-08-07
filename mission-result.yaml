@@ -1,0 +1,78 @@
+schema_version: 1
+mission:
+  id: B5-3
+  repository: MetaStudy999/codyssey-basic-b5-3-fastapi-auth-service
+  status: PASS
+
+control_tower:
+  repository: MetaStudy999/codyssey-basic
+  baseline_sha: 0d1581b3e82366988f57e1d76da311c028b8e15e
+  write_status: READ_ONLY_MAINTAINED
+  integration_status: PENDING_SERIAL_INTEGRATION
+
+source:
+  mode: FULL_SOURCE
+  confidence: HIGH
+  mission_pdf: VALID
+  mission_markdown: VALID
+  evaluation_markdown: VALID
+  evaluation_pdf: MISSING
+  gaps:
+    - Separate Evaluation PDF was not found; valid Evaluation Markdown was used.
+
+dependency:
+  b5_2: RECOMMENDED
+  build_blocking: false
+  waiting_upstream: false
+
+implementation:
+  authentication: session
+  depends_auth: true
+  models: [User, Project, Task]
+  relationships:
+    - User 1:N Project
+    - Project 1:N Task
+  ownership_enforced: true
+  state_transition: "Task pending <-> done"
+  database: SQLite
+  rendering: Jinja2 SSR
+
+gates:
+  G1_SOURCE: PASS
+  G2_BUILD: PASS
+  G3_TEST: PASS
+  G4_REVIEW: PASS
+  G5_RUNTIME: PASS
+  G6_EVIDENCE: PASS
+  G7_LEARN: PASS
+  G8_MERGE: PASS
+
+validation:
+  compileall: PASS
+  pytest:
+    status: PASS
+    passed: 10
+  runtime:
+    health: "200"
+    anonymous_protected_route: "303 /login?next=/app/projects"
+  review:
+    blocker: 0
+    major: 0
+    independent_agent: NOT_AVAILABLE_NOT_CLAIMED
+  secret_exposure: NONE_FOUND
+
+evidence:
+  - evidence/test-results.md
+  - tests/
+  - docs/ARCHITECTURE.md
+  - docs/LEARNING.md
+
+git:
+  implementation_pr: https://github.com/MetaStudy999/codyssey-basic-b5-3-fastapi-auth-service/pull/1
+  implementation_merge_sha: 642f65527476f3d85832631b757137c9e52e4a06
+
+backlog:
+  - optional browser screenshots
+  - OAuth/social login
+  - advanced RBAC
+  - external deployment
