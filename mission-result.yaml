@@ -1,78 +1,98 @@
 schema_version: 1
 mission:
-  id: B5-3
-  repository: MetaStudy999/codyssey-basic-b5-3-fastapi-auth-service
-  status: PASS
+  id: "B5-3"
+  title: "로그인이 되고 회원끼리 연결되는 웹 서비스 만들기"
 
 control_tower:
-  repository: MetaStudy999/codyssey-basic
-  baseline_sha: 0d1581b3e82366988f57e1d76da311c028b8e15e
-  write_status: READ_ONLY_MAINTAINED
-  integration_status: PENDING_SERIAL_INTEGRATION
+  repository: "MetaStudy999/codyssey-basic"
+  baseline_sha: "0d1581b3e82366988f57e1d76da311c028b8e15e"
+  drift: "NONE"
+
+mission_repository:
+  repository: "MetaStudy999/codyssey-basic-b5-3-fastapi-auth-service"
+  baseline_sha: "4d309ad7df51760c1219aa1fdb2c5dee96d5fe06"
+  final_commit_sha: "642f65527476f3d85832631b757137c9e52e4a06"
+  pull_request: "https://github.com/MetaStudy999/codyssey-basic-b5-3-fastapi-auth-service/pull/1"
+  merge_status: "MERGED"
 
 source:
-  mode: FULL_SOURCE
-  confidence: HIGH
-  mission_pdf: VALID
-  mission_markdown: VALID
-  evaluation_markdown: VALID
-  evaluation_pdf: MISSING
+  mode: "FULL_SOURCE"
+  confidence: "HIGH"
+  mission_source:
+    state: "VALID"
+    location: "b5-3-mission.pdf"
+  evaluation_source:
+    state: "VALID"
+    location: "b5-3-evaluation.md"
   gaps:
-    - Separate Evaluation PDF was not found; valid Evaluation Markdown was used.
+    - "Evaluation PDF is absent; the official Evaluation Markdown is VALID and substantive, so no requirement remains unverified."
 
-dependency:
-  b5_2: RECOMMENDED
-  build_blocking: false
-  waiting_upstream: false
-
-implementation:
-  authentication: session
-  depends_auth: true
-  models: [User, Project, Task]
-  relationships:
-    - User 1:N Project
-    - Project 1:N Task
-  ownership_enforced: true
-  state_transition: "Task pending <-> done"
-  database: SQLite
-  rendering: Jinja2 SSR
+execution:
+  status: "PASS"
+  learning: "NOT-STUDIED"
+  current_gate: "G8_MERGE"
+  verdict: "ACCEPT"
 
 gates:
-  G1_SOURCE: PASS
-  G2_BUILD: PASS
-  G3_TEST: PASS
-  G4_REVIEW: PASS
-  G5_RUNTIME: PASS
-  G6_EVIDENCE: PASS
-  G7_LEARN: PASS
-  G8_MERGE: PASS
+  G1_SOURCE: "PASS"
+  G2_BUILD: "PASS"
+  G3_TEST: "PASS"
+  G4_REVIEW: "PASS"
+  G5_RUNTIME: "PASS"
+  G6_EVIDENCE: "PASS"
+  G7_LEARN: "PASS"
+  G8_MERGE: "PASS"
+
+requirements:
+  confirmed: 14
+  passed: 14
+  partial: 0
+  failed: 0
+  unverified: 0
 
 validation:
-  compileall: PASS
-  pytest:
-    status: PASS
-    passed: 10
-  runtime:
-    health: "200"
-    anonymous_protected_route: "303 /login?next=/app/projects"
-  review:
-    blocker: 0
-    major: 0
-    independent_agent: NOT_AVAILABLE_NOT_CLAIMED
-  secret_exposure: NONE_FOUND
+  tests: "PASS"
+  commands:
+    - "python -m compileall -q app tests"
+    - "pytest -q"
+  blocker: 0
+  major: 0
+  minor: 0
+
+runtime:
+  required: true
+  owner: "AI"
+  result: "PASS"
+  notes: "Actual local Uvicorn runtime evidence records GET /health -> 200, anonymous GET /app/projects -> 303 redirect to /login?next=/app/projects, and GET / -> 200. Automated tests also cover ownership, state transitions, cascade deletion, and SQLite persistence."
 
 evidence:
-  - evidence/test-results.md
-  - tests/
-  - docs/ARCHITECTURE.md
-  - docs/LEARNING.md
+  complete: true
+  locations:
+    - "evidence/test-results.md"
+    - "tests/"
+    - "docs/ARCHITECTURE.md"
+    - "docs/LEARNING.md"
+    - "HANDOFF.md"
+  missing: []
 
-git:
-  implementation_pr: https://github.com/MetaStudy999/codyssey-basic-b5-3-fastapi-auth-service/pull/1
-  implementation_merge_sha: 642f65527476f3d85832631b757137c9e52e4a06
+dependency:
+  state: "RECOMMENDED"
+  related_missions:
+    - "B5-2"
+
+risks:
+  - "A separate Codex/Copilot independent-review execution interface was not available in this Workcell; no independent-agent PASS is claimed."
+  - "Learner personal mastery/explanation has not been demonstrated; implementation-aligned learning material is complete."
 
 backlog:
-  - optional browser screenshots
-  - OAuth/social login
-  - advanced RBAC
-  - external deployment
+  - "Optional browser screenshots"
+  - "OAuth/social login"
+  - "Advanced RBAC"
+  - "External deployment"
+
+representative_integration:
+  required: true
+  status: "PENDING"
+  requested_updates:
+    - "config/missions.yaml"
+  generated_outputs_direct_edit: false
