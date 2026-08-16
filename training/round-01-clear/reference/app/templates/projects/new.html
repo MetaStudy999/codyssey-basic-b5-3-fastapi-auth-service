@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}새 프로젝트{% endblock %}
+{% block content %}
+<h1>새 프로젝트</h1>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<form method="post" action="/app/projects">
+  <label for="name">프로젝트 이름</label>
+  <input id="name" name="name" maxlength="120" required>
+  <button type="submit">만들기</button>
+</form>
+<p><a href="/app/projects">목록으로</a></p>
+{% endblock %}
