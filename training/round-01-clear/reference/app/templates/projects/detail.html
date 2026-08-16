@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ project.name }}{% endblock %}
+{% block content %}
+<h1>{{ project.name }}</h1>
+<p>소유자: {{ project.owner.username }}</p>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+
+<h2>할 일 추가</h2>
+<form method="post" action="/app/projects/{{ project.id }}/tasks">
+  <label for="title">할 일</label>
+  <input id="title" name="title" maxlength="160" required>
+  <button type="submit">추가</button>
+</form>
+
+<h2>할 일 목록</h2>
+{% if project.tasks %}
+  {% for task in project.tasks %}
+  <article>
+    <strong class="{{ 'done' if task.is_done else '' }}">{{ task.title }}</strong>
+    <span> — 상태: {{ '완료' if task.is_done else '진행중' }}</span>
+    <form method="post" action="/app/tasks/{{ task.id }}/toggle" style="margin-top:8px">
+      <button type="submit">{{ '미완료로 변경' if task.is_done else '완료로 변경' }}</button>
+    </form>
+  </article>
+  {% endfor %}
+{% else %}
+  <p>등록된 할 일이 없습니다.</p>
+{% endif %}
+<p><a href="/app/projects">프로젝트 목록으로</a></p>
+{% endblock %}
