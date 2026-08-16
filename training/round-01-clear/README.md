@@ -1,11 +1,34 @@
-# Round 01 — CLEAR
+# B5-3 Round 01 — CLEAR
 
-입문자가 공식 미션과 평가 기준을 바탕으로 단계별로 따라가며 미션을 완료합니다.
+구분: **선택 미션 (OPTIONAL)**  
+현재 모드: **Phase A — REFERENCE BUILD**  
+Runtime Mission 상태: **⬜ NOT STARTED**
 
-진행 순서: Mission 확인 → 용어/개념 → 환경 → 구현 → 검증 → Evidence → CLEAR.
+## 현재 판정
 
-핵심 문서:
-- BEGINNER-GUIDE.md
-- CHECKLIST.md
+B5-3의 세션 인증 + User/Project/Task 관계 + Task 상태 변경 **Reference 핵심 기준본을 준비했습니다.** 실제 Runtime/Evidence 전이므로 아직 `✅ CLEAR`가 아닙니다.
 
-상세 폴더와 파일은 실제로 필요해지는 시점에만 생성합니다.
+## 핵심 문서
+
+- `REFERENCE-BUILD.md`
+- `REFERENCE-STATUS.md`
+- `BEGINNER-GUIDE.md`
+- `CHECKLIST.md`
+- `reference/README.md`
+- `docs/requirements-mapping.md`
+- `docs/evaluation-qa.md`
+- `evidence/README.md`
+
+## 기준 구현 핵심
+
+- 세션 기반 로그인/로그아웃
+- `Depends(require_username)` 보호
+- 공개/보호 URL 정책
+- 로그인 전/후 UI
+- User 1:N Project 1:N Task
+- `back_populates`
+- `cascade="all, delete-orphan"`
+- Task 진행중↔완료 상태 변경
+- Jinja2 SSR + SQLite/SQLAlchemy
+
+Reference 코드가 존재한다는 이유만으로 Runtime PASS를 표시하지 않습니다.
