@@ -18,6 +18,7 @@ B5-3의 세션 인증 + User/Project/Task 관계 + Task 상태 변경 **Referenc
 
 ## 핵심 문서
 
+- `START-CHECK.md` — CRUD/DB/Auth 시작 전 자가진단
 - `REFERENCE-BUILD.md`
 - `REFERENCE-STATUS.md`
 - `BEGINNER-GUIDE.md`
@@ -26,6 +27,8 @@ B5-3의 세션 인증 + User/Project/Task 관계 + Task 상태 변경 **Referenc
 - `docs/requirements-mapping.md`
 - `docs/evaluation-qa.md`
 - `evidence/README.md`
+
+`START-CHECK.md`는 공식 Gate가 아니라 부족한 CRUD·DB·인증 개념을 미리 찾기 위한 안내입니다.
 
 ## 기준 구현 핵심
 
