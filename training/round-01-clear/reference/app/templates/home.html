@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}홈 | B5-3{% endblock %}
+{% block content %}
+<h1>프로젝트 할 일 서비스</h1>
+<p>로그인한 사용자가 자신의 프로젝트와 할 일을 관리하고, 할 일 상태를 완료/미완료로 변경하는 B5-3 기준 서비스입니다.</p>
+{% if current_user %}
+  <p><a href="/app/projects">내 프로젝트로 이동</a></p>
+{% else %}
+  <p><a href="/login">로그인 후 핵심 기능 사용</a></p>
+{% endif %}
+{% endblock %}
