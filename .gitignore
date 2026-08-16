@@ -12,6 +12,11 @@ __pycache__/
 .pytest_cache/
 *.pyc
 
+# B5-3 로컬 SQLite Runtime 산출물
+*.db
+*.db-shm
+*.db-wal
+
 # Node.js 의존성/빌드 결과
 node_modules/
 dist/
