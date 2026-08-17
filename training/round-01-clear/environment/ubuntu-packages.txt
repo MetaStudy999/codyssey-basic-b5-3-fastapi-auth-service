@@ -1,0 +1,4 @@
+# B5-3 — Ubuntu 24.04 mission-specific APT packages
+# FastAPI/Auth/Session/SQLAlchemy libraries belong in the repository-local .venv.
+python3
+python3-venv
